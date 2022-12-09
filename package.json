@@ -1,0 +1,23 @@
+{
+  "name": "devdeck",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hack-Latency/DevDeck.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hack-Latency/DevDeck/issues"
+  },
+  "homepage": "https://github.com/Hack-Latency/DevDeck#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "leaflet": "^1.9.3"
+  }
+}
