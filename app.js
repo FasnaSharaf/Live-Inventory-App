@@ -18,7 +18,7 @@ app.listen(3000, () => {
 mongoose.set("strictQuery", false);
 
 const uri =
-  "mongodb+srv://raspberry:TJPmCtVfR8eKonmB@cluster1.enfdems.mongodb.net/?retryWrites=true&w=majority";
+"mongodb+srv://manikandan2004:Manikandan999@cluster0.lo8dn30.mongodb.net/?retryWrites=true&w=majority";
 
 async function connect() {
   try {
@@ -144,14 +144,18 @@ app.delete("/:id", (req, res) => {
 
 
 
+app.post("/store", (req,res) => {
+  retailerRegister.find({ unique_id: req.body.unique_id}, function (err, retailersReg) {
+    Field: retailersReg
+       })
+       .sort({ createdAt: -1 });
+})
 
-let stuff ;
 
 app.post("/user", (req, res) => {
   retailer.find({ item: req.body.item }, function (err, retailers) {
- List: retailers,
- stuff = db.retailers.findOne({item: req.body.item})
-console.log(stuff)
+ List: retailers
+
     })
     .sort({ createdAt: -1 });
 });

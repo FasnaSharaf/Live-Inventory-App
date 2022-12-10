@@ -23,46 +23,20 @@
       </div>
     </nav>
 
-    <form
-      style="display: flex; justify-content: center; align-items: center"
-      method="post"
-      action="/user"
-    >
-      <div class="form-group col-6 col-md-6" style="margin-top: 10px">
-        <input
-          type="text"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Search water bottle"
-          name="item"
-        />
-        <button type="submit" class="btn btn-primary" style="margin-top: 10px">
-          Submit
-        </button>
-      </div>
-    </form>
-
-    <% if (List.length === 0 ){ %>
+    <% if (Field.length === 0 ){ %>
 
     <h1>No retailers yet.....</h1>
 
     <% } else { %>
 
     <div class="row mt-5">
-      <% List.forEach(retailers =>{ %>
+      <% Field.forEach(retailersReg =>{ %>
 
       <div
         class="col-sm-6 col-md-4"
         style="display: flex; justify-content: center; align-items: center"
       >
-        <div class="card text-white bg-dark mb-3" style="min-width: 25rem">
-          <div class="card-header">Item name : <%= retailers.item %></div>
-          <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text">quantity : <%= retailers.quanity %></p>
-            <p class="card-text">store id : <%= retailers.unique_id %></p>
-          </div>
+        <h1>retailersReg.shopName</h1>
         </div>
       </div>
 
