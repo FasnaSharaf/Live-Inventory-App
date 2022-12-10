@@ -71,6 +71,7 @@ app.post("/", (req, res) => {
   const createDoc = async () => {
     try {
       const data = new retailer({
+        unique_id: req.body.unique_id,
         shopName: req.body.shop_name,
         item: req.body.shop_items,
         quanity: req.body.item_quantity,
@@ -98,6 +99,7 @@ app.post("/reg", (req, res) => {
   const createDoc = async () => {
     try {
       const data = new retailerRegister({
+        unique_id: req.body.unique_id,
         shopName: req.body.shop_name,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
