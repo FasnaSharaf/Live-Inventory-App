@@ -43,24 +43,6 @@ app.get("/user", (req, res) => {
   res.render("customer.ejs");
 });
 
-// const createDoc = async () =>{
-//   try{
-//     const data = new retailer({
-
-//       shopName: "marutu store",
-//     item: "bottle",
-//     quanity: 34,
-//     })
-
-//     const doc = await data.save();
-//     console.log(doc);
-//   }
-//   catch(err){
-//     console.error(err);
-//   }
-// }
-// createDoc();
-
 app.post("/", (req, res) => {
   const createDoc = async () => {
     try {
@@ -83,6 +65,10 @@ app.post("/", (req, res) => {
 app.get("/reg", (req, res) => {
   res.render("reg.ejs");
 });
+
+app.get("/map", (req, res) => {
+  res.render("map.ejs")
+})
 
 app.post("/reg", (req, res) => {
   const createDoc = async () => {
