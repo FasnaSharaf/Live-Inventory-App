@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const retailerSchema = new Schema ({
-
+    id: {
+        type: Number,
+        required: true,
+    },
     item:{
      type: String, 
      required: true,
