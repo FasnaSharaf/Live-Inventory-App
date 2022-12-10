@@ -5,7 +5,7 @@ const app = express();
 const retailer = require("./model/ret.js");
 const bodyParser = require("body-parser");
 const { name } = require("ejs");
-const retailerRegister = require("./model/reg")
+const retailerRegister = require("./model/reg");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -32,11 +32,13 @@ connect();
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  retailer.find({}, (id) => {
-    res.render("index.ejs", {
-      userName: id,
-    });
-  });
+  retailer
+    .find({}, function (err, retailers) {
+      res.render("index.ejs", {
+        List: retailers,
+      });
+    })
+    .sort({ createdAt: -1 });
 });
 
 app.get("/user", (req, res) => {
@@ -67,8 +69,8 @@ app.get("/reg", (req, res) => {
 });
 
 app.get("/map", (req, res) => {
-  res.render("map.ejs")
-})
+  res.render("map.ejs");
+});
 
 app.post("/reg", (req, res) => {
   const createDoc = async () => {

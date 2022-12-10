@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 const retailerSchema = new Schema ({
 
-    shopName:{
-        type: String, 
-        required: true,
-    },
     item:{
      type: String, 
      required: true,
