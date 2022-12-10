@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const { name } = require("ejs");
 const retailerRegister = require("./model/reg");
 
+const store2 = require("./model/store2");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(3000, () => {
@@ -41,9 +43,20 @@ app.get("/", (req, res) => {
     .sort({ createdAt: -1 });
 });
 
+
+
 app.get("/user", (req, res) => {
-  res.render("customer.ejs");
+  retailer
+    .find({}, function (err, retailers) {
+      res.render("customer.ejs", {
+        List: retailers,
+      });
+    })
+    .sort({ createdAt: -1 });
 });
+
+
+
 
 app.post("/", (req, res) => {
   const createDoc = async () => {
@@ -91,3 +104,31 @@ app.post("/reg", (req, res) => {
   createDoc();
   res.redirect("/");
 });
+
+
+
+      const data = new store2({
+        item: "brush",
+        quanity: "300",
+      });
+      data.save();
+
+
+      app.delete('/:id' , (req,res) => {
+
+        const id = req.params.id;
+      
+        const myresponse ={
+          status : 'success'
+        }
+      
+        retailer.findByIdAndDelete(id)
+           .then(result => {
+             
+      
+             res.json(myresponse)
+           })
+           .catch(err => console.log(err))
+           res.redirect("/");
+      });
+      
