@@ -43,13 +43,19 @@ app.get("/", (req, res) => {
     .sort({ createdAt: -1 });
 });
 
-// app.get('/reg' , function(req, res) {
-//   res.render()
-// })
+app.get("/user", function (req, res) {
+  retailer
+    .find({}, function (err, retailers) {
+      res.render("customer.ejs", {
+        List: retailers,
+      });
+    })
+    .sort({ createdAt: -1 });
+});
 
 app.post("/user", (req, res) => {
   retailer
-    .find({"item": req.body.item}, function (err, retailers) {
+    .find({ item: req.body.item }, function (err, retailers) {
       res.render("customer.ejs", {
         List: retailers,
       });
