@@ -8,7 +8,11 @@ const registrationSchema = new Schema ({
         type: String, 
         required: true,
     },
-    location: {
+    latitude: {
+        type: String,
+        required: true,
+    },
+    longitude: {
         type: String,
         required: true,
     },

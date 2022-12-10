@@ -47,7 +47,6 @@ app.get("/", (req, res) => {
 //   res.render()
 // })
 
-
 app.get("/user", (req, res) => {
   retailer
     .find({}, function (err, retailers) {
@@ -59,12 +58,8 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-
-      res.render("web.ejs")
-
-
+  res.render("web.ejs");
 });
-
 
 app.post("/", (req, res) => {
   const createDoc = async () => {
@@ -98,7 +93,8 @@ app.post("/reg", (req, res) => {
     try {
       const data = new retailerRegister({
         shopName: req.body.shop_name,
-        location: req.body.location,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
         username: req.body.username,
         password: req.body.password,
       });
@@ -113,32 +109,27 @@ app.post("/reg", (req, res) => {
   res.redirect("/");
 });
 
+const data = new store2({
+  item: "brush",
+  quanity: "300",
+});
+data.save();
 
+app.delete("/:id", (req, res) => {
+  const id = req.params.id;
 
-      const data = new store2({
-        item: "brush",
-        quanity: "300",
-      });
-      data.save();
+  const myresponse = {
+    status: "success",
+  };
 
+  retailer.findByIdAndDelete("6394974f22966afb495804f3", (err, re) => {
+    console.log(err, re);
+  });
+  //  .then(result => {
 
-      app.delete('/:id' , (req,res) => {
-
-        const id = req.params.id;
-      
-        const myresponse ={
-          status : 'success'
-        }
-      
-        retailer.findByIdAndDelete('6394974f22966afb495804f3',(err,re)=>{
-          console.log(err,re)
-        })
-          //  .then(result => {
-             
-          //   //  res.json(result)
-          //    console.log('hi');
-          //  })
-          //  .catch(err => console.log(err))
-          //  res.redirect("/");
-      });
-      
+  //   //  res.json(result)
+  //    console.log('hi');
+  //  })
+  //  .catch(err => console.log(err))
+  //  res.redirect("/");
+});
