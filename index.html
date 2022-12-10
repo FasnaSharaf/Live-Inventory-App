@@ -1,0 +1,156 @@
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>DevDeck</title>
+
+    <!-- Load Leaflet from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin=""></script>
+
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@^3.0.8/dist/esri-leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector@4.0.0/dist/esri-leaflet-vector.js"></script>
+    
+    <!-- Load Esri Leaflet Geocoder from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@^3.1.3/dist/esri-leaflet-geocoder.css">
+    <script src="https://unpkg.com/esri-leaflet-geocoder@^3.1.3/dist/esri-leaflet-geocoder.js"></script>
+
+    <!--For current location-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+<!--For search icon-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 5.8vh;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        color: #323232;
+      }
+      .commoditySearch{
+       height:2vh;
+       width:100vw;
+       position: absolute;
+       left:45vw;
+      }
+
+
+.commoditySearch button {
+  
+  padding: 6px 10px;
+  margin-top: 8px;
+  
+  background: #ddd;
+  font-size: 11px;
+  border: none;
+  cursor: pointer;
+}
+
+.commoditySearch button:hover {
+  background: #ccc;
+}
+    </style>
+  </head>
+
+  <body>
+        <div class="commoditySearch">
+            <form>
+              <input type="text" placeholder="Search for a commodity..." name="search">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+  
+    <div id="map"></div>
+
+    <script>
+
+const map = L.map("map", {
+        minZoom: 2
+      })
+
+      map.setView([11.0510, 76.0711], 9); // Trivandrum
+
+      const apiKey = "AAPKf1a5d3b89502419dae30d08f98e871d265uHo5LKz-PyXJJKAr8WLbXEar8Tw5tG9m-S1ihTbriSpUuvJu1p7oIXhrONJglo";
+
+      const basemapEnum = "ArcGIS:Navigation";
+
+      L.esri.Vector.vectorBasemapLayer(basemapEnum, {
+        apiKey: apiKey
+      }).addTo(map);
+
+      //for displaying coordinates of a page
+      map.on('click', function(e){
+  var lt = String(e.latlng.lat),
+  lg = String(e.latlng.lng);
+  var popup = L.popup()
+    .setLatLng(e.latlng)
+    .setContent(lt + " " + lg)
+    .openOn(map);
+});
+//for search bar (address/place)
+      const searchControl = L.esri.Geocoding.geosearch({
+        position: "topright",
+        placeholder: "Enter an address or place Eg:Kochi",
+        useMapBounds: false,
+
+        providers: [
+          L.esri.Geocoding.arcgisOnlineProvider({
+            apikey: apiKey,
+            nearby: {
+              lat: -33.8688,
+              lng: 151.2093
+            }
+          })
+        ]
+      }).addTo(map);
+
+      /*NO USE!!!!!!!!
+      
+      //popup feature layer
+      var trailheads = L.esri
+        .featureLayer({
+          url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads_Styled/FeatureServer/0"
+        })
+        .addTo(map);
+        trailheads.bindPopup(function (layer) {
+            return L.Util.template("<b>{TRL_NAME}</b><br>{PARK_NAME}</br>", layer.feature.properties);
+});*/
+var StoreIcon = L.icon({
+    iconUrl: 'store.png',
+    iconSize:     [170, 95], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [70, -90] // point from which the popup should open relative to the iconAnchor
+});
+L.marker([8.914844233169159, 76.63391189802282], {icon: StoreIcon}).addTo(map).bindPopup("SHOP 1");
+L.marker([8.91403809138972, 76.63267674363418], {icon: StoreIcon}).addTo(map).bindPopup("SHOP 2");
+L.marker([8.913698637132553, 76.63156059586908], {icon: StoreIcon}).addTo(map).bindPopup("SHOP 3");
+L.marker([8.915173139271289, 76.63216159851181], {icon: StoreIcon}).addTo(map).bindPopup("SHOP 4");
+
+//finding current location
+var lc = L.control
+  .locate({
+    position: "topleft",
+    strings: {
+      title: "Click here to find your current location!"
+    }
+  }).addTo(map);
+
+ 
+    </script>
+
+  </body>
+
+</html>
