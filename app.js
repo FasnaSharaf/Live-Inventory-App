@@ -43,6 +43,9 @@ app.get("/", (req, res) => {
     .sort({ createdAt: -1 });
 });
 
+// app.get('/reg' , function(req, res) {
+//   res.render()
+// })
 
 
 app.get("/user", (req, res) => {
@@ -55,7 +58,12 @@ app.get("/user", (req, res) => {
     .sort({ createdAt: -1 });
 });
 
+app.get("/home", (req, res) => {
 
+      res.render("web.ejs")
+
+
+});
 
 
 app.post("/", (req, res) => {
@@ -122,13 +130,15 @@ app.post("/reg", (req, res) => {
           status : 'success'
         }
       
-        retailer.findByIdAndDelete(id)
-           .then(result => {
+        retailer.findByIdAndDelete('6394974f22966afb495804f3',(err,re)=>{
+          console.log(err,re)
+        })
+          //  .then(result => {
              
-      
-             res.json(myresponse)
-           })
-           .catch(err => console.log(err))
-           res.redirect("/");
+          //   //  res.json(result)
+          //    console.log('hi');
+          //  })
+          //  .catch(err => console.log(err))
+          //  res.redirect("/");
       });
       
