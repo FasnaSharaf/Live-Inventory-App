@@ -47,9 +47,9 @@ app.get("/", (req, res) => {
 //   res.render()
 // })
 
-app.get("/user", (req, res) => {
+app.post("/user", (req, res) => {
   retailer
-    .find({}, function (err, retailers) {
+    .find({"item": req.body.item}, function (err, retailers) {
       res.render("customer.ejs", {
         List: retailers,
       });
