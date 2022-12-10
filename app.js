@@ -141,3 +141,25 @@ app.delete("/:id", (req, res) => {
   //  .catch(err => console.log(err))
   //  res.redirect("/");
 });
+
+
+
+
+let stuff ;
+
+app.post("/user", (req, res) => {
+  retailer.find({ item: req.body.item }, function (err, retailers) {
+ List: retailers,
+ stuff = db.retailers.findOne({item: req.body.item})
+console.log(stuff)
+    })
+    .sort({ createdAt: -1 });
+});
+
+// app.post("/user", (req, res) => {
+//   retailerRegister.find({ item: req.body.stuff }, function (err, retailerRegister) {
+// res.render('/user')
+// regiii: retailerRegister,
+//     })
+//     .sort({ createdAt: -1 });
+// });

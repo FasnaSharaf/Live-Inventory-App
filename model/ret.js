@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const retailerSchema = new Schema ({
-    id: {
+    unique_id: {
         type: Number,
         required: true,
     },
