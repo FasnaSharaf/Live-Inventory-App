@@ -33,7 +33,7 @@ connect();
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
+app.get("/item", (req, res) => {
   retailer
     .find({}, function (err, retailers) {
       res.render("index.ejs", {
@@ -63,7 +63,7 @@ app.post("/user", (req, res) => {
     .sort({ createdAt: -1 });
 });
 
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
   res.render("web.ejs");
 });
 
@@ -114,7 +114,7 @@ app.post("/reg", (req, res) => {
     }
   };
   createDoc();
-  res.redirect("/");
+  res.redirect("/item");
 });
 
 const data = new store2({
@@ -144,12 +144,15 @@ app.delete("/:id", (req, res) => {
 
 
 
-app.post("/store", (req,res) => {
-  retailerRegister.find({ unique_id: req.body.unique_id}, function (err, retailersReg) {
-    Field: retailersReg
-       })
-       .sort({ createdAt: -1 });
-})
+app.get("/store", (req, res) => {
+  retailerRegister
+    .find({ item: req.body.item }, function (err, retailersReg) {
+      res.render("store.ejs", {
+        Field: retailersReg,
+      });
+    })
+    .sort({ createdAt: -1 });
+});
 
 
 app.post("/user", (req, res) => {
